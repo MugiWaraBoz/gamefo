@@ -1,0 +1,356 @@
+{% extends "main.html" %}
+
+{% block land_page %}
+
+<div class="main_container_usr">
+    {% if usr_data %}
+    <div class="tabs">
+        <button class="cmnBtn userInfo activeBtn" onclick="revealBox('userInfo')">User info</button>
+        <hr>
+        <button class="cmnBtn updateInfo" onclick="revealBox('updateInfo')">Update info</button>
+        <hr>
+        <button class="cmnBtn gameLibrary" onclick="revealBox('gameLibrary')">User Games</button>
+        <hr>
+        <button class="cmnBtn preferanceInfo" onclick="revealBox('preferanceInfo')">Preferance</button>
+    </div>
+    
+    <div class="tabs_info">
+        
+    <!-- userInfo -->
+    <div class="tar about_user active" data-platform="userInfo">
+        <div class="username"><strong style="color: green"> Username :</strong > {{ usr_data.user_name }}</div>
+        <div><strong style="color: green"> Registered on :</strong> {{ usr_data.register_date }} </div>
+        <div><strong style="color: green"> Total Games in Library :</strong> {{ usr_data.games_count }} </div>
+
+        <form action="{{ url_for('delete_acc') }}" method="post" id="delForm">
+        <div><strong style="color: green"> Delete Account? :</strong> <button class="delBtn" type="button" onclick="alerDel()"><i class="fa-solid fa-burst fa-2xl" style="color: #fe6262;"></i></button> </div>
+        </form>
+    </div>
+
+    <!-- updateInfo -->
+    <div class="tar updateUser" data-platform="updateInfo">
+        <div class="toggle_btns"> 
+        <div class="toggle-option underline" data-form="change-username-form">Change Username</div>
+        <div class="toggle-option" data-form="change-password-form">Change Password</div>
+        </div>
+        <div class="change-username-form" style="display: flex;">
+            <form action="{{ url_for('change_username') }}" class="form_temp" method="POST">
+                <label for="old_usrn">Old Username</label>
+                <input autocomplete="off" type="text" name="old_usrn">
+    
+                <label for="new_usrn">New Username</label>
+                <input autocomplete="off" type="text" name="new_usrn">
+    
+                <label for="new_con_pass">Confirm Password</label>
+                <span>
+                <input autocomplete="off" type="password" name="con_pass" id="con_pass">
+                <button type="button" onclick="togglePasswordVisibility('con_pass')">Show</button><br>
+                </span>
+
+                <button type="submit" >Submit Change</button>
+            </form>
+        </div>
+    
+        <div class="change-password-form" style="display: none;">
+            <form action="{{ url_for('change_password') }}" class="form_temp" method="POST">
+                <label for="old_pass">Old Password</label>
+                <span>
+                <input autocomplete="off" type="password" name="old_pass" id="old_pass">
+                <button type="button" onclick="togglePasswordVisibility('old_pass')">Show</button><br>
+                </span>
+
+                <label for="new_pass">New Password</label>
+                <span>
+                <input autocomplete="off" type="password" name="new_pass" id="new_pass">
+                <button type="button" onclick="togglePasswordVisibility('new_pass')">Show</button><br>
+                </span>
+                
+                <label for="new_con_pass">Confirm New Password</label>
+                <span>
+                <input autocomplete="off" type="password" name="new_con_pass" id="new_con_pass">
+                <button type="button" onclick="togglePasswordVisibility('new_con_pass')">Show</button><br>
+                </span>
+
+                <button type="submit" >Submit Change</button>
+            </form>
+            <div>
+                <div class="req_check">
+                    <pre class="font_size_pre">
+Make sure:
+Password has at least one letter
+Password has at least one number
+Password has unique characters
+Password needs to be at least 8 characters long
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- gameLibrary -->
+    <div class="tar gameLibrary" data-platform="gameLibrary">
+        <div class="titleCount">Your Games : {{ usr_data.games_count }}</div>
+        {% for game in usr_data['game_data'] %}
+            <div class="game_card">
+            <img src="{{ game.image_url }}" alt="game.image_url">
+            <span>{{ game.game_name }}</span>
+            <div style="display: flex;margin-top: 10px;">
+            <a class="mg-10" href="{{ url_for('game_info', game_id=game.game_id) }}"><i class="fa-solid fa-share-from-square fa-lg" style="color: #ffffff;"></i></a>
+            <form class="mg-10" action="/remove_game" method="post" style="display: flex; align-items: center;" >
+                <input type="hidden" name="game_id" value="{{ game.game_id }}">
+                <button style="border: 0px;" class="add_btn" type="submit" style="background-color: transparent;"><i class="fa-solid fa-circle-xmark fa-xl" style="color: #f33535;"></i></button>
+            </form>
+            </div>
+            </div>
+
+        {% endfor %}
+    </div>
+
+    <!-- Preferance -->
+    <div class="tar preferance" data-platform="preferanceInfo">
+        <div class="bannerIMG">
+        </div>
+        <div class="preferance_title">Unlock the full potential of our Random Game feature and discover personalized recommendations on the front page by setting your preferences below. Tailor your gaming experience to your liking and let us curate a list of games that match your unique interests. Start exploring the gaming world with games catered just for you!</div>
+        <form action="{{ url_for("rec_game_usr") }}" method="post" id="tagForm" style="display: flex;flex-direction: column;">
+            
+            <div class="preferanceBox">
+            <div class="mid_contain containBox">
+            <p class="title"> Devs <span class="dropDownDevs"><i class="fa-solid fa-caret-down"></i></span></p>
+            <div class="devs sndBox">
+                {% for name in devs %}
+                <span class="mg">
+                    <label for="{{ name["name"] }}">{{ name["name"] }}</label>
+                    <input type="checkbox" name="selected_devs" value="{{ name["id"] }}">
+                </span>
+                {% endfor %}            
+            </div>
+            </div>
+    
+            <div class="mid_contain containBox">
+            <p class="title"> Publishers <span class="dropDownPublishers"><i class="fa-solid fa-caret-down"></i></span> </p>
+            <div class="pubs sndBox">
+                {% for name in pubs %}
+                <span class="mg">
+                    <label for="{{ name["name"] }}">{{ name["name"] }}</label>
+                    <input type="checkbox" name="selected_pubs" value="{{ name["id"] }}">
+                </span>
+                {% endfor %}
+                
+            </div>
+            </div>
+
+            <div class="mid_contain containBox">
+            <p class="title"> Platforms <span class="dropDownPlatforms"><i class="fa-solid fa-caret-down"></i></span> </p>
+            <div class="plats sndBox">
+                {% for name in plats %}
+                <span class="mg">
+                    <label for="{{ name["name"] }}">{{ name["name"] }}</label>
+                    <input type="checkbox" name="selected_plats" value="{{ name["id"] }}">
+                </span>
+                {% endfor %}
+                
+            </div>
+            </div>
+            
+            <div class="mid_contain containBox">
+            <p class="title"> Genres <span class="dropDownGenere"><i class="fa-solid fa-caret-down"></i></span> </p>
+            <div class="genres sndBox">
+                {% for name in genres %}
+                <span class="mg">
+                    <label for="{{ name["name"] }}">{{ name["name"] }}</label>
+                    <input type="checkbox" name="selected_genres" value="{{ name["id"] }}">
+                </span>
+                {% endfor %}
+                
+            </div>
+            </div>
+    
+            <div class="mid_contain containBox">
+                <p class="title"> OrderBy <span class="dropDownOrder"><i class="fa-solid fa-caret-down"></i></span> </p>
+                <div class="ordering sndBox">
+                    <span class="mg">
+                        <label for="-metacritic">metacritic</label>
+                        <input type="checkbox" name="selected_ordering[]" value="-metacritic">
+                    </span>
+                    
+                    <span class="mg">
+                        <label for="-rating">rating</label>
+                        <input type="checkbox" name="selected_ordering[]" value="-rating, -ratings_count">
+                    </span>
+                    
+                    <span class="mg">
+                        <label for="-released">released</label>
+                        <input type="checkbox" name="selected_ordering[]" value="-released">
+                    </span>
+                    
+                </div>
+            </div>
+            </div>
+            
+            <button class="set_pref" type="submit" onclick="pick_game()">Set Preferance</button>
+            <span style="font-size: 1rem; font-style: italic; margin-bottom: 10px; text-align: center;">*Deselect all checkboxes to reset your preferences. Start fresh and tailor your gaming experience exactly to your liking by refining your selections.</span>
+            
+        </form>
+
+    </div>
+    {% endif %}
+</div>
+
+
+
+<script>
+
+    
+
+
+
+
+
+
+    const dropDownDevs = document.querySelector(".dropDownDevs")
+    const dropDownPublishers = document.querySelector(".dropDownPublishers")
+    const dropDownPlatforms = document.querySelector(".dropDownPlatforms")
+    const dropDownGenere = document.querySelector(".dropDownGenere")
+    const dropDownOrder = document.querySelector(".dropDownOrder")
+
+
+    const devs = document.querySelector(".devs") 
+    const pubs = document.querySelector(".pubs")
+    const plats = document.querySelector(".plats")
+    const genres = document.querySelector(".genres")
+    const ordering = document.querySelector(".ordering")
+
+    dropDowns(dropDownDevs, devs)
+    dropDowns(dropDownPublishers, pubs)
+    dropDowns(dropDownPlatforms, plats)
+    dropDowns(dropDownGenere, genres)
+    dropDowns(dropDownOrder, ordering)
+    
+    function dropDowns(drop, names) {
+        drop.addEventListener("click", ()=>{
+            names.classList.toggle("show_div_pick") ;
+         })
+    }
+    
+
+
+    function pick_game() {
+        let generCheckboxes = document.getElementsByName("selected_genres");
+        let devsCheckboxes = document.getElementsByName("selected_devs");
+        let pubsCheckboxes = document.getElementsByName("selected_pubs");
+        let platsCheckboxes = document.getElementsByName("selected_plats");
+        let orderCheckboxes = document.getElementsByName("selected_ordering[]");
+    
+        collectCheckboxes(devsCheckboxes, "selected_devs");
+        collectCheckboxes(pubsCheckboxes, "selected_pubs");
+        collectCheckboxes(platsCheckboxes, "selected_plats");
+        collectCheckboxes(generCheckboxes, "selected_genres");
+        collectCheckboxes(orderCheckboxes, "selected_ordering[]");
+    
+        document.getElementById("tagForm").submit();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        function collectCheckboxes(checkboxes, inputName) {
+            const selectedValue = [];
+        
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    selectedValue.push(checkbox.value);
+                }
+            });
+        
+            let hiddenInput = document.querySelector(`input[name="${inputName}"]`);
+            if (!hiddenInput) {
+                hiddenInput = document.createElement("input");
+                hiddenInput.type = "hidden";
+                hiddenInput.name = inputName;
+                document.getElementById("tagForm").appendChild(hiddenInput);
+            }
+            hiddenInput.value = selectedValue.join(",");
+        }
+
+
+        // Add event listeners after the DOM is fully loaded
+    const toggleButtons = document.querySelectorAll('.toggle-option');
+
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const formName = this.getAttribute('data-form');
+
+            // Remove "underline" class from all buttons
+            toggleButtons.forEach(btn => {
+                btn.classList.remove("underline");
+            });
+
+            // Add "underline" class to the clicked button
+            button.classList.add("underline");
+
+            // Toggle the form
+            toggleForm(formName);
+        });
+    });
+    });
+
+
+
+    function togglePasswordVisibility(passwordID) {
+        let show_password = document.getElementById(passwordID);
+
+        if (show_password.type === "password") {
+            show_password.type = "text";
+        } else {
+            show_password.type = "password";
+        }
+    }
+
+    function revealBox(entry) {
+        let btnAll = document.querySelectorAll(".cmnBtn");
+        let entryAll = document.querySelectorAll(".tar");
+    
+        // Remove classes from all elements
+        entryAll.forEach(entryEl => entryEl.classList.remove("active"));
+        btnAll.forEach(btn => btn.classList.remove("activeBtn"));
+    
+        // Toggle classes for the specified element
+        let btn = document.querySelector(`.${entry}`);
+        let entryEl = document.querySelector('.tar[data-platform="' + entry + '"]');
+    
+        if (entryEl) {
+            entryEl.classList.toggle("active");
+            btn.classList.toggle("activeBtn");
+        } else {
+            console.error('Target element not found for platform:', entry);
+        }
+    }
+
+    function alerDel(){
+        let result = confirm("Do you want to delete this account permanently?");
+
+        if(result){
+            document.getElementById('delForm').submit();
+            alert("Account deleted!");
+        } else {
+            alert("Deletion canceled.");
+        }
+    }
+
+    function toggleForm(formName) {
+        // Hide all forms
+        document.querySelectorAll('.change-username-form, .change-password-form').forEach(form => {
+            form.style.display = 'none';
+        });
+    
+        // Show the selected form
+        const selectedForm = document.querySelector(`.${formName}`);
+        if (selectedForm) {
+            selectedForm.style.display = 'flex';
+        } else {
+            console.error(`Form with class '${formName}' not found.`);
+        }
+    }
+    
+    
+</script>
+
+{% endblock %}

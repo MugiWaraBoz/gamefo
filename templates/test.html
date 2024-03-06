@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test for game_page</title>
+    <link rel="stylesheet" href="../static/styles/main_page.css">
+    <link rel="stylesheet" href="../static/styles/front_page.css">
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="front_page_container">
+            <div class="top_rated_game">
+                {% for games in top10 %}
+                <span>{{ games.background_image }}</span>
+                {% endfor %}
+            </div>
+            <div class="most_played_game"></div>
+            <div class=""></div>
+            <!-- for everyone -->
+            <span class="heading"> Gamefo. </span>
+            <img src="../static/styles/assets/738065.jpg" alt="Horizon_zero_Down_jpg">
+        </div>
+    </div>
+    
+
+
+
+        <!-- JAVASCRIPT -->
+        <script>
+
+        <script src="../static/scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{% extends "main.html" %}
+
+{% block land_page %}
+
+<div style="display: flex;flex-wrap: wrap;justify-content: center;padding-left: 1rem;padding-right: 1rem;">
+
+
+        {% for game in game_found %}
+        <div class="game_cars_rng">
+            <span style="text-align: center;color: white;">
+                <div style="position: relative;margin-bottom: 10px;">
+                {% if game.id in usr_games|map(attribute='game_id') %}
+                <span class="in_library">In Library</span>
+                {% endif %}
+                <img src="{{ game.background_image }}" alt="{{ game.background_image }}">
+                <span class="reveal_tags" data-platform="{{ game.id }}">
+                    <div class="tags_container">
+                        <div style="
+                        display: flex;
+                        flex-direction: column;
+                        height: 17rem;
+                        ">
+                        <h1 style="text-decoration: underline; margin-bottom:10px;">Tags</h1>
+                        {% for game_tags in game["tags"] %}
+                        {% if game_tags.language == "eng" %}
+                        <span>{{ game_tags.name }}{% if not loop.last %}, {% endif %}</span>
+                        {% endif %}
+                        {% endfor %}
+                        </div>
+                    </div>
+                </span>
+                </div>
+
+                <!-- Rating and Name -->
+                <div>
+                    <span style="font-size: 2rem;">{{ game.name }}</span>
+                    <span>{{ game.rating }}<sub>/5</sub></span>
+                </div>
+                <div style="
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                margin-top: 10px;
+                    ">
+                    <button onclick="reqTags('{{game.id}}')">reveal tags</button>
+                    <a href="{{ url_for('game_info', game_id=game.id) }}"><i class="fa-solid fa-share-from-square" style="color: #ffffff;"></i></a>
+                    <span class="buttons_rng">
+                        {% if game.id in usr_games|map(attribute='game_id') %}
+                        <form action="/remove_game" method="post" style="display: flex; align-items: center;" >
+                            <input type="hidden" name="game_id" value="{{ game.id }}">
+                            <button style="border: 0px;" class="add_btn" type="submit" style="background-color: transparent;"><i class="fa-solid fa-circle-xmark fa-xl" style="color: #f33535;"></i></button>
+                        </form>
+                        {% else %}
+                        <form action="/add_game" method="post" style="display: flex; align-items: center;" >
+                            <input type="hidden" name="game_id" value="{{ game.id }}">
+                            <input type="hidden" name="game_name" value="{{ game.name }}">
+                            <input type="hidden" name="image_url" value="{{ game.background_image }}">
+                            <button style="border: 0px;" class="add_btn" type="submit" style="background-color: transparent;"><i class="fa-solid fa-circle-check fa-xl" style="color: #63E6BE;"></i></button>
+                        </form>
+                        {% endif %}
+                    
+                    
+                </span>
+                </div>
+            </span>
+        </div>
+        {% endfor %}
+
+        <div class="next_prev">
+            {% if p_u %}
+                <a href="/previous" class="p_n_button"><i class="fa-solid fa-backward"></i></a>
+            {% endif %}
+            
+            <p>Couldn't find your game? kee browsing!</p>
+            
+            {% if n_u %}
+                <a href="/next" class="p_n_button"><i class="fa-solid fa-forward"></i></a>
+            {% endif %}
+        </div>
+
+
+</div>
+
+<script>
+
+    function reqTags(id) {
+        let targetElement = document.querySelector('.reveal_tags[data-platform="' + id + '"]');
+    
+        if (targetElement) {
+            targetElement.classList.toggle('show_tags');
+        } else {
+            console.error('Target element not found for platform:', id);
+        }
+    }
+    
+
+</script>
+{% endblock %}

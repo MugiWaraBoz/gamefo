@@ -1,0 +1,101 @@
+.main_container_picker {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    text-align: center;
+}
+
+
+.title {
+    margin-top: 5rem;
+    margin-bottom: 15px;
+    font-size: 2rem;
+    text-decoration: underline;
+}
+
+
+.tags,
+.genres,
+.ordering,
+.devs,
+.pubs,
+.plats,
+.platforms,
+.publishers,
+.developers {
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    display: none;
+    text-align: left;
+    justify-content: center;  
+    flex-direction: row;
+    overflow: auto;
+    height: 21rem;
+}
+
+.show_div_pick {
+    display: flex;
+    justify-content: center;
+}
+
+.mid_contain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30rem;
+}
+
+.mg {
+    margin: 15px;
+    width: 22rem;
+}
+
+.game_picker {
+    margin: 5rem;
+    width: 8rem;
+    height: 3rem;
+    font-size: 1.5rem;
+}
+
+.dropDownTags,
+.dropDownGenere,
+.dropDownOrder {
+    margin-left: 10px;
+    cursor: crosshair;
+}
+
+@media screen and (max-width: 1024px) {
+    .main_container_picker {
+        margin-left: 10rem;
+        margin-right: 10rem;
+    }
+
+    .mid_contain {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .main_container_picker {
+        margin-left: 2rem;
+        margin-right: 2rem;
+
+    }
+
+    
+
+    .tags {
+    flex-direction: column;
+    }
+
+    .tags,
+    .genres,
+    .ordering,
+    .platforms,
+    .publishers,
+    .developers {
+        flex-direction: row;
+}
+}

@@ -1,0 +1,476 @@
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&display=swap');
+
+/* .jura-<uniquifier> {
+    font-family: "Jura", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+  } */
+
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Jura", sans-serif;
+    
+}
+
+.mobile_nab_menu {
+    display: none;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: linear-gradient(to bottom, #040D12, #0E1A24);
+    background-attachment: fixed;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.wrapeer_main {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+}
+
+.flash_it {
+    display: flex;
+    /* margin-top: 6.4rem; */
+    height: 2rem;
+    font-size: 0.9rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
+.nav {
+    height: 3rem;
+}
+
+
+.header{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px ;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    /* width: 100vw; */
+}
+
+.footer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    margin-top: 25px;
+    color: white;
+    background-image: linear-gradient(to top, #040D12, #0e1a2400);
+}
+
+.footer p {
+    font-size: 2rem;
+}
+
+.footer .footer_more {
+    color: rgb(0, 136, 255);
+    font-size: 1rem;
+}
+
+.header a {
+    color: #93B1A6;
+    text-decoration: none;
+}
+
+.web_name {
+    font-size: 2.5rem;
+}
+
+
+.nav_item {
+    padding: 10px;
+}
+
+img {
+    height: 20rem;
+    width: 20rem;
+}
+
+
+
+.r_or_l::before,
+.r_or_l::after {
+    content: "";
+}
+
+.r_or_l {
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    cursor: not-allowed;
+}
+
+
+input {
+    text-align: center;
+    margin: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+button {
+    cursor: grab;
+    border: none;
+    border-radius: 5px;
+    background-color: #93B1A6;
+    color: #040D12;
+    padding: 0.2rem;
+    transition: 150ms ease-out;
+}
+
+button:hover {
+    background-color: #809990f5;
+}
+
+.cover_r,
+.cover_l {
+    position: absolute;
+    cursor: cell;
+    margin: 1rem;
+    width: 550px; /* Set a maximum width */
+    height: 550px; /* Set a maximum height */
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    color: #000000;
+    opacity: 1;
+    transition: 300ms ease-out;
+}
+
+.opacity_z {
+    opacity: 0;
+    transition: 300ms ease-out;
+    pointer-events: none;
+}
+
+.r_hover,
+.l_hover {
+    transition: 300ms ease-out;
+}
+
+.r_hover:hover,
+.l_hover:hover {
+    /* color: #00000050; */
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 1); /* Adjust the values as needed */;
+    cursor: pointer;
+}
+
+.error_li,
+.error_ul {
+    text-align: center;
+    font-size: 12px;
+    list-style: none;
+    color: red;
+    }
+
+.register, 
+.login {
+    position: relative;
+    margin: 1rem;
+    width: 550px; /* Set a percentage width */
+    height: 550px; /* Set a percentage height (viewport height) */
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #D9D9D9;
+    color: #040D12;
+}
+    
+
+.label_f {
+    padding-left: 10px;
+    margin-top: 20px;
+}
+
+.main_container_get_started {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Search page css */
+
+.game_search_form {
+    text-align: center;
+    
+}
+
+.game_search {
+    width: 80vw;
+    text-align: start;
+    padding-left: 10px;
+    height: 35px;
+    background-color: #FFFFFF25;
+    color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1); /* Adjust the values as needed */
+}
+
+.game_search_button {
+    width: 35px;
+    height: 35px;
+    color: white;
+    background-color: #ffffff00;
+}
+
+.game_search_button:hover {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.753);
+    background-color: #ffffff00;
+}
+
+
+@media screen and (max-width: 1118px) {
+
+    img {
+        height: 20rem;
+        width: 20rem;
+    }
+
+
+    .game_search_form {
+        text-align: center;
+        
+    }
+
+    .game_search {
+        width: 80vw;
+        text-align: start;
+        padding-left: 10px;
+        height: 35px;
+        background-color: #FFFFFF25;
+        color: #ffffff;
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1); /* Adjust the values as needed */
+    }
+
+    .game_search_button {
+        width: 35px;
+        height: 35px;
+        color: white;
+        background-color: #ffffff00;
+    }
+
+    .game_search_button:hover {
+        cursor: pointer;
+        color: rgba(255, 255, 255, 0.753);
+        background-color: #ffffff00;
+    }
+
+    .r_or_l::before,
+    .r_or_l::after {
+        content: "―――";
+    }
+
+    .r_or_l {
+        color: white;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+
+    input {
+        text-align: center;
+        margin: 0.5rem;
+        border: none;
+        border-radius: 5px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    button {
+        cursor: grab;
+        border: none;
+        border-radius: 5px;
+        background-color: #93B1A6;
+        color: #040D12;
+        padding: 0.2rem;
+        transition: 150ms ease-out;
+    }
+
+    button:hover {
+        background-color: #809990f5;
+    }
+
+    .cover_r,
+    .cover_l {
+        position: absolute;
+        margin: 1rem;
+        width: 80%; /* Set a percentage width */
+        max-width: 450px; /* Set a maximum width */
+        min-width: 320px; /* Set a minimum width */
+        height: 80vh; /* Set a percentage height (viewport height) */
+        max-height: 450px; /* Set a maximum height */
+        min-height: 320px; /* Set a minimum height */
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #1e1e1eef;
+        backdrop-filter: blur(5px);
+        color: #EEEDEB;
+        opacity: 1;
+        transition: 300ms ease-out;
+    }
+
+    .opacity_z {
+        opacity: 0;
+        transition: 300ms ease-out;
+        pointer-events: none;
+    }
+
+    .r_hover,
+    .l_hover {
+        transition: 300ms ease-out;
+    }
+
+    .r_hover:hover,
+    .l_hover:hover {
+        color: #EEEDEB50;
+        cursor: pointer;
+    }
+
+    .error_li,
+    .error_ul {
+        text-align: center;
+        font-size: 12px;
+        list-style: none;
+        color: red;
+        }
+
+    .register, 
+    .login {
+        position: relative;
+        margin: 1rem;
+        width: 80%; /* Set a percentage width */
+        max-width: 450px; /* Set a maximum width */
+        min-width: 320px; /* Set a minimum width */
+        height: 80vh; /* Set a percentage height (viewport height) */
+        max-height: 450px; /* Set a maximum height */
+        min-height: 320px; /* Set a minimum height */
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #D9D9D9;
+        color: #040D12;
+    }
+        
+
+    .label_f {
+        padding-left: 10px;
+        margin-top: 20px;
+    }
+
+    .main_container_get_started {
+        height: 100vh;
+        display: grid;
+        grid-template-rows: auto;
+        justify-content: center;
+        text-align: left;
+    }
+
+
+}
+
+
+@media screen and (max-width: 430px) {
+    .header {
+        display: none;
+    }
+
+    .footer {
+        padding-bottom: 9rem;
+    }
+
+    .mobile_nab_menu {
+        display: block;
+    }
+
+    .top_text {
+        display: flex;
+        color: white;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        height: 5rem;
+    }
+
+    .bottom_nav {
+        position: fixed;
+        flex-direction: row;
+        bottom: 0;
+        width: 100%;
+        justify-content: space-evenly;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.678);
+        backdrop-filter: blur(10px);
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .main_bar {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        bottom: 0;
+        width: 100%;
+        justify-content: space-evenly;
+        z-index: 2;
+        font-size: 1rem;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .main_bar a {
+        color: white;
+    }
+
+    .my_account_mbl {
+        position: fixed;
+        background-color: rgba(0, 0, 0, 0.884);
+        backdrop-filter: blur(10px);
+        border-radius: 50%;
+        width: 4.5rem;
+        height: 4.5rem;
+        bottom: 0.11rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+    }
+}

@@ -1,0 +1,178 @@
+{% extends "main.html" %}
+
+
+{% block land_page %}
+
+<div class="main_container_picker">
+    <form action="{{ url_for("random_game") }}" method="post" id="tagForm" style="display: flex;flex-direction: column;align-items: center;">
+        <div style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: center;">
+        
+        <div class="mid_contain">
+        <p class="title"> Tags <span class="dropDownTags"><i class="fa-solid fa-caret-down"></i></span></p>
+        <div class="tags">
+            {% for name in tags %}
+            <span class="mg">
+                <label for="{{ name["name"] }}">{{ name["name"] }}</label>
+                <input type="checkbox" name="selected_tags" value="{{ name["id"] }}">
+            </span>
+            {% endfor %}            
+        </div>
+        </div>
+
+        <div class="mid_contain">
+        <p class="title"> Genres <span class="dropDownGenere"><i class="fa-solid fa-caret-down"></i></span> </p>
+        <div class="genres">
+            {% for name in genres %}
+            <span class="mg">
+                <label for="{{ name["name"] }}">{{ name["name"] }}</label>
+                <input type="checkbox" name="selected_genres" value="{{ name["id"] }}">
+            </span>
+            {% endfor %}
+            
+        </div>
+        </div>
+        
+        
+        <div class="mid_contain">
+        <p class="title"> Platforms <span class="dropDownPlatforms"><i class="fa-solid fa-caret-down"></i></span> </p>
+        <div class="platforms">
+            {% for name in platforms %}
+            <span class="mg">
+                <label for="{{ name["name"] }}">{{ name["name"] }}</label>
+                <input type="checkbox" name="selected_platforms" value="{{ name["id"] }}">
+            </span>
+            {% endfor %}
+            
+        </div>
+        </div>
+        
+        
+        <div class="mid_contain">
+        <p class="title"> Publishers <span class="dropDownPublishers"><i class="fa-solid fa-caret-down"></i></span> </p>
+        <div class="publishers">
+            {% for name in publishers %}
+            <span class="mg">
+                <label for="{{ name["name"] }}">{{ name["name"] }}</label>
+                <input type="checkbox" name="selected_publishers" value="{{ name["id"] }}">
+            </span>
+            {% endfor %}
+            
+        </div>
+        </div>
+        
+        
+        <div class="mid_contain">
+        <p class="title"> Developers <span class="dropDownDevelopers"><i class="fa-solid fa-caret-down"></i></span> </p>
+        <div class="developers">
+            {% for name in developers %}
+            <span class="mg">
+                <label for="{{ name["name"] }}">{{ name["name"] }}</label>
+                <input type="checkbox" name="selected_developers" value="{{ name["id"] }}">
+            </span>
+            {% endfor %}
+            
+        </div>
+        </div>
+
+        <div class="mid_contain">
+            <p class="title"> OrderBy <span class="dropDownOrder"><i class="fa-solid fa-caret-down"></i></span> </p>
+            <div class="ordering">
+                <span class="mg">
+                    <label for="-metacritic">metacritic</label>
+                    <input type="checkbox" name="selected_ordering[]" value="-metacritic">
+                </span>
+                
+                <span class="mg">
+                    <label for="-rating">rating</label>
+                    <input type="checkbox" name="selected_ordering[]" value="-rating, -ratings_count">
+                </span>
+                
+                <span class="mg">
+                    <label for="-released">released</label>
+                    <input type="checkbox" name="selected_ordering[]" value="-released">
+                </span>
+                
+            </div>
+        </div>
+        </div>
+
+        <button class="game_picker" type="submit" onclick="pick_game()">Search</button>
+        
+    </form>
+</div>
+
+<script>
+    const dropDownTags = document.querySelector(".dropDownTags")
+    const dropDownGenere = document.querySelector(".dropDownGenere")
+    const dropDownPlatforms = document.querySelector(".dropDownPlatforms")
+    const dropDownPublishers = document.querySelector(".dropDownPublishers")
+    const dropDownDevelopers = document.querySelector(".dropDownDevelopers")
+    const dropDownOrder = document.querySelector(".dropDownOrder")
+
+
+    const tags = document.querySelector(".tags") 
+    const genres = document.querySelector(".genres")
+    const platforms = document.querySelector(".platforms")
+    const publishers = document.querySelector(".publishers")
+    const developers = document.querySelector(".developers")
+    const ordering = document.querySelector(".ordering")
+
+    dropDowns(dropDownPlatforms, platforms)
+    dropDowns(dropDownPublishers, publishers)
+    dropDowns(dropDownDevelopers, developers)
+    dropDowns(dropDownGenere, genres)
+    dropDowns(dropDownOrder, ordering)
+    dropDowns(dropDownTags, tags)
+    
+    function dropDowns(drop, names) {
+        drop.addEventListener("click", ()=>{
+            names.classList.toggle("show_div_pick") ;
+         })
+    }
+
+
+    function pick_game() {
+        let tagCheckboxes = document.getElementsByName("selected_tags");
+        let generCheckboxes = document.getElementsByName("selected_genres");
+        let platformsCheckboxes = document.getElementsByName("selected_platforms");
+        let publishersCheckboxes = document.getElementsByName("selected_publishers");
+        let developersCheckboxes = document.getElementsByName("selected_developers");
+        let orderCheckboxes = document.getElementsByName("selected_ordering[]");
+    
+        collectCheckboxes(tagCheckboxes, "selected_tags");
+        collectCheckboxes(generCheckboxes, "selected_genres");
+        collectCheckboxes(platformsCheckboxes, "selected_platforms");
+        collectCheckboxes(publishersCheckboxes, "selected_publishers");
+        collectCheckboxes(developersCheckboxes, "selected_developers");
+        collectCheckboxes(orderCheckboxes, "selected_ordering[]");
+    
+        document.getElementById("tagForm").submit();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        function collectCheckboxes(checkboxes, inputName) {
+            const selectedValue = [];
+        
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    selectedValue.push(checkbox.value);
+                }
+            });
+        
+            let hiddenInput = document.querySelector(`input[name="${inputName}"]`);
+            if (!hiddenInput) {
+                hiddenInput = document.createElement("input");
+                hiddenInput.type = "hidden";
+                hiddenInput.name = inputName;
+                document.getElementById("tagForm").appendChild(hiddenInput);
+            }
+            hiddenInput.value = selectedValue.join(",");
+        }
+    });
+
+    
+    
+
+</script>
+
+{% endblock %}

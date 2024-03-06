@@ -1,0 +1,255 @@
+/* Universal */
+body {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.wrapper,.front_page_container {
+    display: flex;
+}
+
+/* Front non authorized_users */
+
+.wrapper {
+    justify-content: center;
+}
+
+.front_page_container {
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100rem;
+}
+
+.heading {
+    font-size: 12rem;
+    font-weight: 400;
+    text-align: center;
+    background: rgb(46,49,146);
+    background: linear-gradient(90deg, rgba(46,49,146,1) 0%, rgba(37,150,199,1) 77%, rgba(27,255,255,1) 100%);
+    background-clip: text;
+    color: transparent;
+}
+
+.heading_2 {
+    font-size: 5rem;
+    font-weight: 400;
+    text-align: center;
+    background: rgb(46,49,146);
+    background: linear-gradient(90deg, rgba(46,49,146,1) 0%, rgba(37,150,199,1) 77%, rgba(27,255,255,1) 100%);
+    background-clip: text;
+    color: transparent;
+}
+
+.front_page_container img {
+    width: 100%;
+    height: auto;
+    border-radius: 25px;
+    /* box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.1); */
+    box-shadow: 1px 1px 122px rgba(255, 255, 255, 0.1);
+}
+
+.margin_img {
+    margin: 2rem;
+}
+
+/* front authorized users */
+.top_rated_game, .top_rated_game_outer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    max-width: 1600px;
+    overflow: hidden;
+    border-radius: 25px;
+    margin: 20px;
+    background-image: linear-gradient(to bottom, #ffffff3f, #0e1a2400);
+}
+
+.top_rated_game_outer {
+    position: relative;
+    overflow: visible;
+    background-image: none;
+}
+
+.title_front {
+    border: 2px solid wheat;
+    padding: 9px;
+    border-radius: 7px;
+    position: absolute;
+    top: -10px;
+    left: 60px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    z-index: 1;
+}
+
+
+.top_rated_game a {
+    text-decoration: none;
+}
+
+.top_rated_game img {
+    width: 14rem;
+    height: 20rem;
+    object-fit: cover;
+    object-position: top;
+    margin: 20px;
+    margin-top: 38px;
+    cursor: cell;
+}
+
+.top10Rated {
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.5rem;
+}
+
+
+
+
+
+@media screen and (min-width: 1920px) {
+.heading {
+    font-size: 20rem;
+}
+.heading_2 {
+    font-size: 3rem;
+}
+}
+
+@media screen and (max-width: 768px) {
+    .heading {
+        font-size: 8rem;
+    }
+    .heading_2 {
+        font-size: 3rem;
+    }
+
+    .top_rated_game {
+
+    }
+
+    .title_front {
+        position: absolute;
+        top: -8px;
+        left: 32%;
+        transform: translateX(-23%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px;
+        z-index: 1;
+    }
+
+    .top_rated_game img {
+
+    }
+
+    .top10Rated {
+        
+    }
+}
+
+
+/* for non log-in users */
+.quote_box {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+    text-align: center;
+    width: auto;
+    height: 50vh;
+    justify-content: center;
+}
+
+.title_quote {
+    font-size: 1.5rem;
+}
+
+.rng_quote {
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.rng_quote::before,
+.rng_quote::after {
+    content: " ' ";
+    font-size: 2rem;
+}
+
+.character_quote{
+    align-self: end;
+}    
+
+.figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+.figure_text {
+    font-size: 2rem;
+    color: white;
+}
+
+.figure_text_2 {
+    color: white;
+    font-size: 1.2rem;
+    padding: 4rem;
+}
+
+.figure img {
+    height: 30rem  !important;
+}
+
+@media screen and (max-width: 1012px) {
+    .figure {
+        flex-direction: column;
+    }
+
+    .figure img {
+        height: 30rem  !important;
+    }
+
+    .figure_text_2 {
+        text-align: center;
+    }
+
+    .title_quote {
+        font-size: 0.8rem;
+    }
+
+    .rng_quote{ 
+        font-size: 1rem;
+    }
+
+    
+    
+}
+
+@media screen and (max-width: 468px) {
+
+    .figure img {
+        height: 15rem  !important;
+    }
+
+    .heading {
+        font-size: 5rem;
+    }
+    .heading_2 {
+        font-size: 2rem;
+    }
+    
+    .title_front {
+        
+    }
+}

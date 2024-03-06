@@ -1,0 +1,83 @@
+{% extends "main.html" %}
+
+
+    
+{% block land_page %}
+
+    {% if current_user.is_authenticated %}
+    <form action="/get_games" method="post" class="game_search_form">
+        <input type="text" name="search" class="game_search">
+        <button type="submit" class="game_search_button" ><i class="fa-brands fa-searchengin fa-2xl"></i></button>
+    </form>
+
+
+    <!-- <div class="game_data_container">
+            <div class="per_game_container">
+                <span class="game_pic">
+                    <img class="game_img" src="https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg" alt="hh">
+                </span>   
+                <span class="game_name">    reeeeeeeeeeee </span> 
+                <span class="game_date">     2024/32/23</span>
+                <span class="game_ratings"><p style="font-size: 15px; text-align: center;">rating</p>3.2</span>
+            </div>
+            <div class="next_prev">
+            <i class="fa-solid fa-backward"></i>
+            <p>Couldn't find your game? kee browsing!</p>
+            <i class="fa-solid fa-forward"></i>
+        </div>
+    </div> -->
+
+    {% if games_data %}
+        <div class="game_data_container">
+            {% for game in games_data %}
+                <div class="per_game_container">
+                    {% if game.id in usr_games|map(attribute='game_id') %}
+                    <span class="in_library">In Library</span>
+                    {% endif %}
+                    <span class="game_pic">
+                        <a href="{{ url_for('game_info', game_id=game.id) }}"><img class="game_img" src="{{ game.background_image }}" alt="{{ game.name }}"></a>  
+                    </span> 
+                    
+                    <div class="name_date">
+                        <span class="game_name">    {{game.name}} </span> 
+                        <span class="game_desc">    {{game.released}} </span>
+                    </div>
+                    
+                    <span class="game_ratings"> 
+                        <p style="font-size: 15px; text-align: center;">rating</p><p>{{game.rating}}<sub>/5</sub></p>
+                    </span>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="next_prev">
+            {% if p_u %}
+                <a href="/previous" class="p_n_button"><i class="fa-solid fa-backward"></i></a>
+            {% endif %}
+            
+            <p>Couldn't find your game? kee browsing!</p>
+            
+            {% if n_u %}
+                <a href="/next" class="p_n_button"><i class="fa-solid fa-forward"></i></a>
+            {% endif %}
+        </div>
+
+    {% else %}
+
+        <div style="color: aliceblue; text-align:center; font-size:2rem; margin-top: 100px;">
+            Search your game now!
+        </div>
+
+    {% endif %}
+    
+    
+    
+    {% else %}
+        <div style="text-align: center; display:flex; flex-direction: column; justify-content:center; align-items:center; height:100vh">
+            <h1 style="color: white; margin-bottom: 10px;">
+                Welcome to this exiting page!!!!
+            </h1>
+            <a href="/get_started" style="color: white; text-decoration:none;">GET STARTED NOW!</a>
+        </div>
+    {% endif %}
+
+{% endblock %}

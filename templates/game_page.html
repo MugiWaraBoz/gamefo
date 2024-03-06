@@ -1,0 +1,393 @@
+{% extends "main.html" %}
+
+
+
+{% block land_page %}
+<div class="main_content">
+<div class="main_container_game_page">
+
+{% if game_data %}
+    <div class="about_game">
+        <div class="game_name">
+            <div class="name_div">
+            <div style="display: flex; justify-content: center;">
+                <span class="game_title">
+                    {{ game_data.name }}
+                </span>
+                    {% if game_data.id in user_game_db|map(attribute='game_id') %}
+                    <form action="/remove_game" method="post" style="display: flex; align-items: center;" >
+                        <input type="hidden" name="game_id" value="{{ game_data.id }}">
+                        <button class="add_btn" type="submit" style="background-color: transparent;"><i class="fa-solid fa-circle-xmark fa-xl" style="color: #ff3838;"></i></button>
+                    </form>
+                    {% else %}
+                    <form action="/add_game" method="post" style="display: flex; align-items: center;" >
+                        <input type="hidden" name="game_id" value="{{ game_data.id }}">
+                        <input type="hidden" name="game_name" value="{{ game_data.name }}">
+                        <input type="hidden" name="image_url" value="{{ game_data.background_image }}">
+                        <button class="add_btn" type="submit" style="background-color: transparent;"><i class="fa-solid fa-circle-plus fa-xl" style="color: #00ffb3;"></i></button>
+                    </form>
+                    {% endif %}
+            </div>
+            
+            <span class="game_publishers">
+                <span>Published by: </span>
+                {% if game_data["publishers"] %}
+                {% for publishers in game_data["publishers"] %}
+                {% if publishers.name %}
+                <span>{{publishers.name}}  </span>
+                {% else %}
+                <span>No publishers</span>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <span>No publishers</span>
+                {% endif %}
+            </span>
+            </div>
+
+            
+        </div>
+        <div class="game_reviews">
+            <span class="game_rating"><p style="font-size: 15px;">rating</p>{{ game_data.rating }}<sub>/5</sub></span>
+            <span class="suggested_by"><p style="font-size: 15px;">suggested by</p>{{ game_data.suggestions_count }}</span>
+            <span class="rated_by"><p style="font-size: 15px;">rated by</p>{{ game_data.ratings_count }}</span>
+            <span class="tier"><p style="font-size: 15px;">tier</p>{{ game_data.rating_top }}</span>
+        </div>
+    </div>
+
+    <div class="cover_pic">
+        <img src="{{ game_data.background_image }}" alt="image_link">
+    </div>
+
+    <!-- Game Description -->
+    <div class="gen_sto_tag sto">
+        <div class="desc_more">
+            <button class="desc_btn" style="font-size: 25px; margin-bottom: 10px;">Game Description</button>
+            <button class="more_btn" style="font-size: 25px; margin-bottom: 10px;">More</button>
+        </div>
+        <div class="desc_container">
+            <div class="desc">
+                {% if game_data["description"] %}
+                <span style="font-size: 15px; text-align: left;" id="engDesc"></span>
+                {% else %}
+                <span style="font-size: 15px;">No Description</span>
+                {% endif %}
+            </div>
+            <div class="more">
+                <span class="metacritic more_box">
+                    {% if game_data.metacritic %}
+                    <p class="info_container_titile">Metacritic</p>
+                    <a class="metacritic_box" href="{{ game_data.metacritic_url }}">{{ game_data.metacritic }}</a>
+                    {% else %}
+                    <p class="info_container_titile">No metacritic</p>
+                    {% endif %}
+                </span>
+                
+                <div class="released_tba more_box">
+                <p class="info_container_titile">Released Data</p>
+                {% if game_data.released %}
+                <span class="info_container" >{{ game_data.released }}</span>
+                {% else %}
+                <p class="info_container">TBA</p>
+                {% endif %}
+                </div>
+                
+                {% if game_data.website %}
+                <span class="website more_box"><a  class="info_container_titile" href="{{ game_data.website }}" style="text-decoration: none; color:white;">Visit website</a></span>
+                {% endif %}
+
+                <div class="lastUpdated more_box">
+                <p class="info_container_titile">last Updated [Date & Time]</p>
+                
+                <span class="info_container">
+                    {% if game_data.updated %}
+                    {{ game_data.updated }}
+                    {% else %}
+                    No update yet
+                    {% endif %}
+                </span>
+                
+                </div>
+                
+                <div class="developers more_box">
+                <p class="info_container_titile">Developed by</p>
+                {% for developers in game_data["developers"] %}
+                
+                <span class="info_container" >
+                    {% if developers.name %}
+                    {{ developers.name }}
+                    {% else %}
+                    Unknown
+                    {% endif %}
+                </span>
+                {% endfor %}
+                </div>
+                
+                <div class="esrb_ratings more_box">
+                    <p class="info_container_titile">ESRB Rating</p>
+                    <span class="info_container" >
+                        {% if game_data.esrb_rating %}
+                        {{ game_data.esrb_rating["name"] }}
+                        {% else %}
+                        No esrb_rating
+                        {% endif %}
+                    </span>
+                </div>
+                
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Game Genres -->
+    <div class="gen_sto_tag">
+        <p style="font-size: 15px;">genres</p>
+        {% if game_data["genres"] %}
+        {% for genre in game_data["genres"] %}
+        <span class="gen_sto_tag_title">{{ genre.name }} {% if not loop.last %}, {% endif %}</span>
+        {% endfor %}
+        {% else %}
+        <span class="gen_sto_tag_title">None</span>
+        {% endif %}
+    </div>
+
+    <div class="req_ss">
+        <div class="reqirements">
+            <span class="box_title">Requirements</span>
+            <div class="switcher">
+                {% for platforms in game_data["platforms"] %}
+                <button class="req_btn" onclick="revealReq('{{ platforms["platform"]["name"] }}')">{{ platforms["platform"]["name"] }}</button>
+                {% endfor %}
+            </div>
+            <div class="reqirements_details">
+                {% for platforms in game_data["platforms"] %}
+                <div class="req-show" style="text-align: left;" data-platform="{{ platforms["platform"]["name"] }}">
+                    {% if platforms["requirements"]["recommended"] or platforms["requirements"]["minimum"] %}
+                    <div style="margin-bottom: 10px;"><span class="recommended" data-platform="{{ platforms["platform"]["name"] }}"></span></div>
+                    <br>
+                    <div><span class="minimum" data-platform="{{ platforms["platform"]["name"] }}"></span></div>
+                    {% else %}
+                    <span>No requirements</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="ss">
+            <span class="box_title">Game Screenshots</span>
+            {% if game_shots["results"] and game_shots["results"][0]["image"] %}
+            <div class="slider">
+                <button class="slider_control next" onclick="nextSlide()"><i class="fa-solid fa-circle-right fa-2xl"></i></button>
+                <button class="slider_control prev" onclick="prevSlide()"><i class="fa-solid fa-circle-left fa-2xl"></i></button>
+                <div class="slides">
+                {% for ss in game_shots["results"] %}
+                    <img class="slide" src="{{ ss.image }}" alt="ugaga">
+                {% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <p>No Screenshots found</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="status_ratings">
+        <div class="add_status">
+        <span class="box_title">Game Status</span>
+            {% if game_data["added_by_status"] %}
+            <span class="rating_info_container">
+            {% for status, value in game_data["added_by_status"].items() %}
+            <div>
+                <p>{{status}} By</p>
+                <p style="font-size: 25px;color: green;font-weight: bold; margin-bottom: 10px;">{{ value }}</p>
+            </div>
+                {% endfor %}
+            </span>
+            {% else %}
+            <p>None</p>
+            {% endif %}
+        </div>
+        <div class="add_ratings">
+        <span class="box_title">Game Ratings</span>
+        {% if game_data["ratings"] %}
+        <span class="rating_info_container">
+            {% for rating_info in game_data["ratings"] %}
+                <div>
+                <p class="rating_info_title">{{ rating_info.title }} By</p>
+                <p class="rating_info_percent"><span style="font-size: 25px;color: green;font-weight: bold;">{{ rating_info.percent }}</span>% People</p>
+                </div>
+            {% endfor %}
+        </span>
+        {% else %}
+            <p>None</p>
+        {% endif %}
+        </div>
+    </div>
+
+
+    <!-- Game stores -->
+    <div class="gen_sto_tag sto">
+        <p style="font-size: 25px;">Game Available in</p>
+        {% if game_data["stores"] %}
+        {% for store in game_data["stores"] %}
+            <span class="gen_sto_tag_title" style="font-size: 15px;">{{ store["store"]["name"] }}{% if not loop.last %}, {% endif %} </span>
+        {% endfor %}
+        {% else %}
+        <span class="gen_sto_tag_title" style="font-size: 15px;">None</span>
+        {% endif %}
+    </div>
+
+    <!-- Game DLC -->
+    {% if game_dlc["results"] %}
+    <div class="gen_sto_tag tag">
+        <p style="font-size: 25px;">Available DLC</p>
+        <div class="dlc_container">
+        {% for results in game_dlc["results"] %}
+        <!-- <a href="{{ url_for('game_info', game_id=results.id) }}"><span class="gen_sto_tag_title" style="font-size: 15px;">{{ results.name }}</span></a> -->
+        <a href="{{ url_for('game_info', game_id=results.id) }}"><img src="{{ results.background_image }}" alt="{{ results.name }}">{{ results.name }}</a>
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+
+    <!-- Game tags -->
+    <div class="gen_sto_tag tag">
+        <p style="font-size: 25px;">tags</p>
+        {% if game_data["tags"] %}
+        {% for tag in game_data["tags"] %}
+        <span class="gen_sto_tag_title" style="font-size: 15px;">{{ tag.name }}{% if not loop.last %}, {% endif %} </span>
+        {% endfor %}
+        {% else %}
+        <span class="gen_sto_tag_title" style="font-size: 15px;">None</span>
+        {% endif %}
+    </div>
+    {% else %}
+    <div style="color: aliceblue;">NO DATA FOUND</div>
+{% endif %}
+
+
+
+</div>
+</div>
+    <!-- JAVASCRIPT -->
+    <script>
+
+        // for the switch between desc and more
+        const descBtn = document.querySelector(".desc_btn");
+        const moreBtn = document.querySelector(".more_btn");
+        const descEl = document.querySelector(".desc");
+        const moreEl = document.querySelector(".more");
+
+        descBtn.addEventListener("click", (e)=>{
+            e.preventDefault;
+            descEl.style.display="block";
+            descBtn.style.textDecoration="underline";
+            moreBtn.style.textDecoration="none";
+            moreEl.style.display="None";
+        });
+        
+        moreBtn.addEventListener("click", (e)=>{
+            e.preventDefault();
+            moreEl.style.display="flex";
+            moreBtn.style.textDecoration="underline";
+            descBtn.style.textDecoration="none";
+            descEl.style.display="None";
+        });
+
+
+
+        // fucntion for revealing pc requirements upon clicking on the buttons
+        function revealReq(platform) {
+            // Remove the 'highlight' class from all elements with class 'req-show'
+            var allReqShowElements = document.querySelectorAll('.req-show');
+            allReqShowElements.forEach(function (element) {
+                element.classList.remove('highlight');
+            });
+        
+            try {
+                // Find the element with the corresponding data attribute
+                var targetElement = document.querySelector('.req-show[data-platform="' + platform + '"]');
+                
+                if (targetElement) {
+                    // Add the 'highlight' class to the target element
+                    targetElement.classList.add('highlight');
+                    console.log('Highlight added for platform:', platform);
+                } else {
+                    console.error('Target element not found for platform:', platform);
+                }
+            } catch (error) {
+                console.error('Error in revealReq:', error);
+            }
+        }
+
+
+
+        // don't know if it's doing anything, i wanted to format the reqirements that are not formatted correctly in the api,
+        // and failed GG
+        {% for platforms in game_data["platforms"] %}
+        
+            {% if platforms["requirements"]["minimum"] %}
+                // This is for MinReqOf{{ platforms["platform"]["name"] }}
+                const reqMin{{ platforms["platform"]["name"] }} = ` {{ platforms["requirements"]["minimum"] | safe }} `;
+                // Split the response into an array of lines
+                const newLine{{ platforms["platform"]["name"] }} = reqMin{{ platforms["platform"]["name"] }}.split('\n');
+                // Insert a line break after "Minimum"
+                newLine{{ platforms["platform"]["name"] }}[0] = newLine{{ platforms["platform"]["name"] }}[0].replace('Minimum:', 'Minimum:\n')
+                // Remove any leading or trailing whitespace from each line
+                const formatedLines{{ platforms["platform"]["name"] }} = newLine{{ platforms["platform"]["name"] }}.map(line => line.trim())
+                // Join the formatted lines back into a single string
+                const formatedResposne{{ platforms["platform"]["name"] }} = formatedLines{{ platforms["platform"]["name"] }}.join('\n')
+                // formatedResposne{{ platforms["platform"]["name"] }} this is the final response we need
+                var targetminElement = document.querySelector('.minimum[data-platform="' + '{{ platforms["platform"]["name"] }}' + '"]');
+                if (targetminElement) {
+                    // Add the 'highlight' class to the target element
+                    targetminElement.innerText = formatedResposne{{ platforms["platform"]["name"] }};
+                    console.log('Minimum added for platform: {{ platforms["platform"]["name"] }}');
+                } else {
+                    console.error('Minimum Target element not found for platform: {{ platforms["platform"]["name"] }}');
+                }
+            {% endif %}
+
+
+            {% if platforms["requirements"]["recommended"] %}
+                // This is for RecReqOf{{ platforms["platform"]["name"] }}
+                const reqRec{{ platforms["platform"]["name"] }} = ` {{ platforms["requirements"]["recommended"] | safe }} `;
+                // Split the response into an array of lines
+                const newRecLine{{ platforms["platform"]["name"] }} = reqRec{{ platforms["platform"]["name"] }}.split('\n');
+                // Insert a line break after "Recommended"
+                newRecLine{{ platforms["platform"]["name"] }}[0] = newRecLine{{ platforms["platform"]["name"] }}[0].replace('Recommended:', 'Recommended:\n')
+                // Remove any leading or trailing whitespace from each line
+                const formatedRecLines{{ platforms["platform"]["name"] }} = newRecLine{{ platforms["platform"]["name"] }}.map(line => line.trim())
+                // Join the formatted lines back into a single string
+                const formatedRecResposne{{ platforms["platform"]["name"] }} = formatedRecLines{{ platforms["platform"]["name"] }}.join('\n')
+                // formatedRecResposne{{ platforms["platform"]["name"] }} this is the final response we need
+                var targetRecElement = document.querySelector('.recommended[data-platform="' + '{{ platforms["platform"]["name"] }}' + '"]');
+                if (targetRecElement) {
+                    // Add the 'highlight' class to the target element
+                    targetRecElement.innerText = formatedRecResposne{{ platforms["platform"]["name"] }};
+                    console.log('Recommended added for platform: {{ platforms["platform"]["name"] }}');
+                } else {
+                    console.error('Recommended Target element not found for platform: {{ platforms["platform"]["name"] }}');
+                }
+            {% endif %}
+
+        {% endfor %}
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const description = {{ game_data ["description"] | tojson | safe }};
+            const englishDescription = description.replace(/<p>Español[\s\S]*?<\/p>/, '');
+            
+            const engEl = document.getElementById("engDesc");
+            if (englishDescription) {
+                engEl.innerHTML = englishDescription;
+            } else {
+                engEl.innerHTML = "No English description available";
+            }
+        });
+    </script>
+
+
+{% endblock %}

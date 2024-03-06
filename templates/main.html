@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../static/styles/main_page.css">
+    <link rel="stylesheet" href="../static/styles/game_page.css">
+    <link rel="stylesheet" href="../static/styles/search_page.css">
+    <link rel="stylesheet" href="../static/styles/front_page.css">
+    <link rel="stylesheet" href="../static/styles/game_picker.css">
+    <link rel="stylesheet" href="../static/styles/rng.css">
+    <link rel="stylesheet" href="../static/styles/user_page.css">
+    <script src="https://kit.fontawesome.com/3a97aa5ed7.js" crossorigin="anonymous"></script>
+
+    <title>{{ title }}</title>
+
+
+</head>
+<body>
+  <div class="wrapeer_main">
+    <div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash_it" style="background: {{ 'linear-gradient(to bottom, #4CAF50, #45A049)' if category == 'success' else 'linear-gradient(to bottom, #FF6262, #D11A1A)' }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  
+
+    <header class="header">
+      <a href="/"><span class="web_name">Gamefo.</span></a>
+      {% if current_user.is_authenticated %}
+      <div style="display: flex;align-items: center;">
+      <a href="{{ url_for('search') }}" style="font-size: 1rem; margin-right:10px;"><i class="fa-brands fa-searchengin fa-2xl" style="color: #ffffff;"></i></a>
+      <a class="nav_item" href="{{ url_for('random_game_selector') }}" style="font-size: 1rem;">Random Game</i></a>
+      <a class="nav_item" href="{{ url_for('game_picker') }}" style="font-size: 1rem;">Game Filter</i></a>
+      <a class="nav_item" href="/logout" style="font-size: 1rem;">logout</a>
+      <a class="nav_item" href="{{ url_for('my_acc') }}" style="font-size: 1rem;"><i class="fa-solid fa-user-secret fa-lg" style="color: #ffffff;"></i></a>
+      </div>
+      {% else %}
+      <a href="/get_started" style="font-size: 1rem;">Get Started</a>
+      {% endif %}
+    </header>
+
+    <nav class="mobile_nab_menu">
+      <div class="top_text"><a style="color: white; text-decoration: none;" href="{{ url_for('index') }}">Gamefo.</a></div>
+      <div class="bottom_nav">
+        <div class="main_bar">  
+        <div class="search_mbl"><a href="{{ url_for('search') }}"><i class="fa-brands fa-searchengin"></i></a></div>
+        <div class="game_filter_mbl"><a href="{{ url_for('game_picker') }}"><i class="fa-solid fa-filter"></i></a></div>
+        <div class="my_account_mbl"><a href="{{ url_for('my_acc') }}"><i class="fa-solid fa-user-secret"></i></a></div>
+        <div style="visibility: hidden;"><i class="fa-solid fa-user-secret"></i></div>
+        <div class="random_game_picker_mbl"><a href="{{ url_for('random_game_selector') }}"><i class="fa-solid fa-shuffle"></i></a></div>
+        <div class="logout_mbl"><a href="{{ url_for('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></div>
+        </div>
+      </div>
+    </nav>
+    {% block main %}
+    {% endblock %}
+
+
+    {% block land_page %}
+    {% endblock %}
+  </div>
+    <footer class="footer">
+      <p class="footer_title">Powerd by</p>
+      <a href="https://rawg.io/apidocs"><p class="footer_more">RAWG api</p></a>
+      <a href="{{ url_for('about_page')}}">About site</a>
+    </footer>
+
+    <script src="../static/scripts/main.js"></script>
+  </div>
+</body>
+</html>

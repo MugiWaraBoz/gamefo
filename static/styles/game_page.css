@@ -1,0 +1,430 @@
+.main_container_game_page {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 1300px;
+}
+
+.about_game,
+.game_name, 
+.req_ss,
+.reqirements,
+.status_ratings,
+.ss, .add_status, .add_ratings, .rating_info_container,
+.desc_more, .metacritic, .dlc_container, .main_content, .name_div  {
+    display: flex;
+}
+
+.main_content {
+    width: 100%;
+    justify-content: center;
+}
+
+.box_title {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+.add_btn:hover {
+    color: #03e09e;
+}
+
+/* STYLES about_game */
+.about_game {
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between; 
+    text-align: center;
+}
+
+.about_game .game_name {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.name_div {
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.about_game .game_name .game_title {
+    font-size: 100%;
+}
+
+.about_game .game_name .game_publishers {
+    font-size: 15px;
+    justify-items: start;
+    align-items: start;
+}
+
+
+.about_game .game_reviews {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    justify-items: center;
+    /* align-items: center; */
+    font-size: 30px;
+    text-align: center;
+    gap: 20px;
+}
+
+
+/* STYLES cover_pic */
+.cover_pic {
+    padding-top: 15px;         
+}
+.cover_pic img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+    box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.1); /* Adjust the values as needed */
+}
+
+
+/* STYLES desc_more */
+.desc_more {
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.active_now {
+    text-decoration: underline;
+}
+
+.desc_container {
+    position: relative;
+    padding-top: 20px;
+}
+
+
+.desc_btn {
+    text-decoration: underline;
+}
+
+.desc_btn,
+.more_btn {
+    color: aliceblue;
+    background-color: transparent;
+    transition: 100ms ease-in;
+}
+
+.desc_btn:hover,
+.more_btn:hover{
+    background-color: transparent;
+}
+
+
+
+.desc_container .more {
+    display: none;
+}
+
+.desc_container .more {
+    flex-wrap: wrap;
+    align-items: start;
+
+}
+
+.metacritic {
+    flex-direction: column;
+}
+
+.metacritic .metacritic_box {
+    background-color: green;
+    color: white;
+    width: auto;
+    align-self: center;
+    padding: 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 200ms ease-in;
+}
+
+.info_container_titile {
+    font-size: 1.5rem;
+    padding-bottom: 3px;
+}
+
+.info_container {
+    color: green;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.more_box {
+    margin: 2.99%;
+    width: 44%;
+    height: 25%;
+}
+
+.metacritic .metacritic_box:hover {
+    padding: 12px;
+    background-color: rgb(0, 102, 0);
+}
+
+/* STYLES gen_sto_tag */
+.gen_sto_tag{
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.gen_sto_tag .gen_sto_tag_title {
+    font-size: 2rem;
+}
+
+/* STYLES req_ss */
+.req_ss, .status_ratings {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+
+.add_ratings {
+    margin-left: 20px;
+}
+
+/* also include some STYLES status_ratings */
+.req_ss {
+    flex-direction: column;
+    width: 100%;
+}
+
+.req_ss .reqirements {
+    margin-bottom: 30px;
+}
+
+.req_ss .reqirements, 
+.ss, .add_status, .add_ratings, .tag, .sto,
+.add_status, .add_ratings {
+    flex-direction: column;
+    /* background-color: aliceblue; */
+    background-color: #1D252952;
+    text-align: center;
+    
+    padding: 15px;
+    border-radius: 15px;
+    width: 100%;
+    box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.1); /* Adjust the values as needed */
+}
+
+.req_btn {
+    width: 270px;
+    height: 46px;
+    margin: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.req_btn:hover {
+    background-color: aliceblue;
+}
+
+
+.reqirements_details {
+    margin-top: 30px;
+}
+
+.reqirements_details ul li {
+    list-style: none;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.req-show {
+    display: none;
+}
+
+.highlight {
+    display: block;
+}
+
+
+.req_ss .ss img {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+}
+
+.slider {
+    position: relative;
+    overflow: hidden;
+}
+
+.slider img {
+    display: none;
+}
+
+img.displaySlide {
+    display: block;
+    animation-name: fade ;
+    animation-duration: 1.5s;
+}
+
+.slider button {
+    top: 50%;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+    position: absolute;
+    z-index: 999;
+    color: aliceblue;
+    box-shadow: 0px 0px 10px #1D252952;
+}
+
+.slider button:hover {
+    color: rgb(187, 190, 192);
+}
+
+.next {
+    right: 2%;
+}
+
+.prev {
+    left: 2%;
+}
+
+
+@keyframes fade {
+    from {opacity: .5;}
+    to {opacity: 1;}
+}
+
+
+/* DLC Container */
+.dlc_container {
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.dlc_container a {
+    color: aliceblue;
+    display: block;
+    width: 175px;
+    cursor: cell;
+}
+
+.dlc_container a:hover {
+    color: rgb(180, 186, 192);
+}
+
+.dlc_container img {
+    padding-top: 10px;
+    height: 10rem;
+    width: 151.77px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.dlc_container img:hover {
+    overflow: hidden;
+    box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.1); /* Adjust the values as needed */
+
+}
+
+/* Rating info */
+
+.rating_info_container {
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.rating_info_percent {
+    margin-bottom: 25px;
+}
+
+/* STYLES tag sto */
+.tag, .sto {
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 4K */
+@media screen and (max-width: 2560px) { 
+    
+}
+    
+    
+    
+/* LAPTOP */
+@media screen and (max-width: 1024px) {
+
+}
+
+    
+/* MOBILE */
+@media screen and (max-width: 768px) {
+    
+    /* STYLES desc_more */
+    .desc_more {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .desc_container .more {
+        flex-wrap: wrap;
+        align-items: start;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    .more_box {
+        margin-bottom: 20px;
+    }
+
+    .info_container_titile {
+        font-size: 1rem;
+    }
+    
+    .info_container {
+        font-size: 1rem;
+    }
+
+
+    .req_btn {
+    font-size: 1rem;
+    width: 177px;
+    height: 25px;
+    }
+
+    .add_ratings {
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+
+    .status_ratings {
+        flex-direction: column;
+    }
+}

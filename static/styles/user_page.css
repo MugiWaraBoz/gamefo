@@ -1,0 +1,321 @@
+.main_container_usr {
+    color: white;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.tar {
+    display: none;
+}
+
+
+.tabs_info, .tabs {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(44, 39, 39, 0.267);
+    box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.1);
+    margin: 1rem;
+    border-radius: 25px;
+    padding: 11px;
+}
+
+.tabs_info {
+    width: 100%;
+}
+
+.tabs {
+    width: 12rem;
+}
+
+.tabs .cmnBtn {
+    color: rgb(0, 0, 0);
+    background-color: green;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 0;
+    height: 5rem;
+}
+
+
+
+.active {
+    display: flex;
+}
+
+.tabs .activeBtn {
+    background-color: rgba(0, 128, 0, 0.541);
+    color: white;
+}
+
+.about_user {
+    flex-direction: column;
+    height: 100%;
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.bannerIMG {
+    position: absolute;
+    width: 100%;
+    top: 2px;
+    height: 40%;
+    z-index: -1;
+    border-radius: 35px;
+    overflow: hidden;
+    background-image: url(/static/styles/assets/wp7549110-gaming-banner-wallpapers.png);
+    background-position: center;
+    background-position-y: 56rem;
+    opacity: 20%;
+}
+
+
+form .delBtn {
+    padding: 0;
+    background-color: transparent;
+    cursor: not-allowed;
+}
+
+.updateUser {
+    flex-direction: column;
+    height: 100%;
+}
+
+.toggle_btns {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.toggle_btns .toggle-option {
+    margin: 10px;
+}
+.change-username-form,
+.change-password-form {
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.form_temp {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    
+    align-items: center;
+
+}
+
+.form_temp input {
+    width: 15rem;
+}
+
+.gameLibrary {
+    position: relative;
+    overflow: auto;
+    flex-wrap: wrap;
+    padding-top: 2rem;
+    justify-content: center;
+}
+
+.titleCount {
+    position: absolute;
+    top: 0;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+
+.game_card {
+    background-image: linear-gradient(to bottom, #ffffff3f, #0e1a2400);
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.game_card .mg-10 {
+    margin: 10px;
+}
+
+.game_card img {
+    object-fit: cover;
+    object-position: top;
+    border-radius: 25px;
+    margin-bottom: 10px;
+}
+
+.game_card button {
+    padding: 0;
+    background-color: transparent;
+}
+
+.game_card button:hover {
+        box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.1);
+}
+
+
+.underline {
+    text-decoration: underline;
+}
+
+.req_check {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.font_size_pre {
+    font-size: 1rem;
+}
+
+
+.preferance {
+    position: relative;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.containBox {
+    width: 40rem;
+}
+
+.preferanceBox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.preferanceBox .mid_contain .title {
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+
+.preferance_title {
+    font-size: 2rem;
+    color: #55ae48;
+    font-weight: bolder;
+    text-align: center;
+    margin: 2rem;
+}
+
+.sndBox {
+    height: 18rem;
+    overflow: auto;
+}
+
+.set_pref {
+    margin: 2rem;
+    align-self: center;
+    height: 3rem;
+    font-size: 1.5rem;
+    width: 15rem;
+}
+
+
+.devs,
+.pubs,
+.plats {
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    text-align: left;
+    justify-content: left;
+    flex-direction: row;
+}
+
+
+*::-webkit-scrollbar {
+    height: 10px;
+    width: 10px; /* Width of the scrollbar */
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #3533ac86; /* Color of the scrollbar thumb */
+    border-radius: 5px; /* Rounded corners of the thumb */
+}
+
+*::-webkit-scrollbar-track {
+    background-color: #0e1a24; /* Color of the scrollbar track */
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 680px) {
+    .main_container_usr {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .tabs .cmnBtn {
+        margin: 0;
+        margin-right: 5px;
+        margin-left: 5px;
+        padding: 5px 0 5px 0;
+    }
+
+    .tabs {
+        flex-direction: row;
+        width: 100% ;
+        justify-content: center;
+    }
+
+    .tabs_info {
+        height: auto;
+        align-items: center;
+    }
+
+    .tabs button {
+        margin-left: 10px;
+        margin-right: 10px;
+        padding: 10px;
+        width: 9rem;
+    }
+
+    .about_user {
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .preferance_title {
+        font-size: 1.2rem;
+    }
+
+    .sndBox {
+        padding-left: 5rem;
+        width: 100%;
+    }
+
+    .containBox {
+        width: 20rem;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .toggle_btns .toggle-option {
+        font-size: ;
+    }
+
+    .font_size_pre {
+        font-size: 0.75rem;
+    }
+
+    .req_check {
+        padding: 0.5rem;
+    }
+}

@@ -1,0 +1,92 @@
+{% extends "main.html" %}
+
+{% block getting_started %}
+    <li class="navbar_list page_register"><a href="#" class="nav_link">Register</a></li>
+    <li class="navbar_list page_login"><a href="#" class="nav_link">Login</a></li>
+{% endblock %}
+
+
+
+{% block main %}
+
+<div class="main_container_get_started">
+    
+        
+    <div class="register">
+        <div class="cover_r blur-layer ">
+            <h1 class="r_hover">Register</h1>
+        </div>
+
+        <div class="register_main_container">
+            <form action="/register" method="post">
+                <p class="label_f">Name:</p>
+                <input autocomplete="none" type="text" name="name"><br>
+                
+                <p class="label_f">Password:</p>
+                <input id="register_password" type="password" name="password" >
+                <button type="button" onclick="togglePasswordVisibility('register_password')">Show</button><br>
+                
+                <div class="password_error">
+                {% if password_check %}
+                    <ul class="error_ul">
+                    {% for req in password_check %}
+                        <li class="error_li">
+                            {{req}}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% endif %} 
+                </div> 
+
+                <p class="label_f">Confirm Password:</p>
+                <input id="register_c_password" type="password" name="confirm_password" >
+                <button type="button" onclick="togglePasswordVisibility('register_c_password')">Show</button><br>
+                <div style="text-align: center; margin-top:10px">
+                    <button type="submit" style="width: 90px;">Register</button>
+                </div> 
+            </form>
+        </div>  
+    </div>
+
+    <div class="r_or_l">
+        OR
+    </div>
+
+    <div class="login">
+        <div class="cover_l">
+            <h1 class="l_hover">login</h1>
+        </div>
+        <div class="login_main_container">
+            <form action="/login" method="post">
+                <p class="label_f">Name:</p>   
+                <input autocomplete="name" type="text" name="name"><br>
+
+                <p class="label_f">Password:</p>
+                <input id="login_password" type="password" name="password">                
+                <button type="button" onclick="togglePasswordVisibility('login_password')">Show</button><br>
+                <div style="text-align: center; margin-top:10px">
+                    <button type="submit" style="width: 90px;">Login</button>
+                </div>    
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+        function togglePasswordVisibility(passwordID) {
+            let show_password = document.getElementById(passwordID);
+    
+            if (show_password.type === "password") {
+                show_password.type = "text";
+            } else {
+                show_password.type = "password";
+            }
+        }
+    </script>
+
+
+{% endblock %}

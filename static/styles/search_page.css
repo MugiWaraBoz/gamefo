@@ -1,0 +1,120 @@
+.game_data_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.per_game_container {
+    position: relative;
+    margin: 2rem;
+    color: white;
+    background-image: linear-gradient(to bottom, #ffffff3f, #0e1a2400);
+    padding: 8px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 26.81%;
+    height: auto;
+    cursor: cell;
+    transition: 200ms ease-in;
+}
+
+.per_game_container:hover {
+    box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.1); /* Adjust the values as needed */
+}
+
+.name_date {
+    align-self: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.game_name {
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+
+.game_ratings {
+    font-size: 2rem;
+    margin-top: 10px;
+    padding-bottom: 15px;
+    align-self: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+
+.game_img {
+width: 100%;
+min-height: 10rem;
+object-fit: cover;
+object-position: top;
+border-radius: 15px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+
+}
+
+
+.next_prev {
+    display: flex;
+    justify-content: center;
+    color: aliceblue;
+    padding-top:50px ;
+    padding-bottom:50px ;
+}
+
+.p_n_button {
+    color: aliceblue;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+
+/* 4K */
+@media screen and (max-width: 2560px) { 
+    
+.game_img {
+    max-height: 30rem; 
+    }
+}
+
+
+
+/* LAPTOP */
+@media screen and (max-width: 1024px) {
+    .per_game_container {
+        width: 23.81%;
+    }
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+
+    .game_data_container {
+        flex-direction: column;
+        justify-content: center;
+        margin: 18px;
+    }
+
+     .per_game_container {
+        margin: 0px;
+        margin-top: 2rem;
+        padding: 8px;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .game_img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+    }
+}

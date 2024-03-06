@@ -1,0 +1,217 @@
+{% extends "main.html" %}
+
+{% block land_page %}
+
+<div class="wrapper">
+
+    <div class="front_page_container">
+        {% if current_user.is_authenticated %}
+        {% if rec_games %}
+        <div class="top_rated_game_outer">
+            <p class="title_front">Recommended games</p>
+        <div class="top_rated_game" id="recommendedSlider">
+            {% for games in rec_games %}
+            <span>
+                <img src="{{ games.background_image }}" alt="{{ games.name }}" draggable="false">
+                <a href="{{ url_for('game_info', game_id=games.id) }}">
+                <p class="top10Rated">{{ games.name }}</p>
+                </a>
+            </span>
+            {% endfor %}
+        </div>  
+        </div>
+        {% endif %}
+
+
+        <div class="top_rated_game_outer">
+            <p class="title_front">Top Games of all time</p>
+        <div class="top_rated_game" id="topRatedSlider">
+            {% if top10 %}
+            {% for games in top10 %}
+            <span>
+                <img src="{{ games.background_image }}" alt="{{ games.name }}" draggable="false">
+                <a href="{{ url_for('game_info', game_id=games.id) }}">
+                <p class="top10Rated">{{ games.name }}</p>
+                </a>
+            </span>
+            {% endfor %}
+            {% endif %}
+        </div>  
+        </div>
+        
+        <div class="top_rated_game_outer">
+            <p class="title_front toy">Top Games of this year</p>  
+        <div class="top_rated_game " id="topRatedThisYearSlider">
+            {% if top_this_year %}
+            {% for games in top_this_year %}
+            <span>
+                <img src="{{ games.background_image }}" alt="{{ games.name }}" draggable="false">
+                <a href="{{ url_for('game_info', game_id=games.id) }}">
+                <p class="top10Rated">{{ games.name }}</p>
+                </a>
+            </span>
+            {% endfor %}
+            {% endif %}
+        </div> 
+        </div> 
+        
+        <div class="top_rated_game_outer">
+            <p class="title_front toy">Genres</p>  
+        <div class="top_rated_game " id="genres">
+            {% if genres %}
+            {% for games in genres %}
+            <span>
+                
+                <img src="{{ games.image_background }}" alt="{{ games.name }}" draggable="false">
+                <a href="{{ url_for('genre_game_info', genre_id=games.id) }}">
+                <p class="top10Rated">{{ games.name }}</p>
+                </a>
+            </span>
+            {% endfor %}
+            {% endif %}
+        </div> 
+        </div> 
+        
+        {% if usr_games %}
+        
+        <div class="top_rated_game_outer">
+            <p class="title_front toy">Games in your Library</p>  
+        <div class="top_rated_game " id="inLibrary">
+            
+            {% for game in usr_games %}
+            <span>
+                
+                <img src="{{ game.image_url }}" alt="{{ game.game_name }}" draggable="false">
+                <a href="{{ url_for('game_info', game_id=game.game_id) }}">
+                <p class="top10Rated">{{ game.game_name }}</p>
+                </a>
+            </span>
+            {% endfor %}
+        </div> 
+        </div> 
+        {% endif %}
+
+        {% else %}
+        
+        <!-- for new users -->
+
+        <div style="display: flex;flex-direction: column;align-items: center;">
+        <span class="heading"> Gamefo. </span>
+        <img class="margin_img"  src="../static/styles/assets/738065.jpg" alt="Horizon_zero_Down_jpg">
+        <span class="heading_2">Explore the Game you want!</span>
+        {% if rand_quotes %}
+        <div class="quote_box">
+        <span class="title_quote">{{ rand_quotes.title }}</span>
+        <span class="rng_quote">{{ rand_quotes.quote }}</span>
+        <span class="character_quote">-{{ rand_quotes.character }}</span>
+        </div>
+        {% endif %}
+
+        <figure class="figure">
+            <img src="../static/styles/assets/screencapture-127-0-0-1-5000-2024-03-05-00_42_32.png" alt="" style="height: auto; width: auto; float:left;">
+            
+            <p class="figure_text_2">
+                <span class="figure_text">Get the top games and stay up to date</span><br>
+                We provide game recommendations on your preferance<br>
+                and also top game of this year, with a feature of adding all the <br>
+                games you like to your library<br>
+            </p>
+        </figure>
+        <figure class="figure">
+            
+            <p class="figure_text_2">
+                <span class="figure_text">Filter your games like a pro</span><br>
+                We have a system that will help you to filter the games based of Tags<br>
+                devs, and more.<br>
+            </p>
+            <img src="../static/styles/assets/screencapture-127-0-0-1-5000-game-picker-2024-03-05-00_43_16.png" alt="" style="height: auto;width: auto;float:right;overflow: auto;"">
+
+        </figure>
+        <figure class="figure">
+            <img src="../static/styles/assets/screencapture-127-0-0-1-5000-my-account-2024-03-05-00_44_35.png" alt="" style="height: auto;width: auto;float:left;overflow: auto;"">
+            <p class="figure_text_2">
+                <span class="figure_text">Manage your account like a GigaChad</span><br>
+                Change User and manage your game library, also<br> 
+                set the preferance for the best recommendations and<br>
+                to get the best result out of random games option<br>
+            </p>
+            <img src="../static/styles/assets/screencapture-127-0-0-1-5000-my-account-2024-03-05-00_44_53.png" alt="" style="height: auto;width: auto;float:right;overflow: auto;"">
+        </figure>
+        
+
+        </div>
+
+
+
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Function to handle auto-slide and looping
+        const initializeSlider = (sliderId) => {
+            const slider = document.getElementById(sliderId);
+            const nextBtn = document.querySelector(".next_s");
+            const prevBtn = document.querySelector(".prev_s");
+    
+            let dragState = false, prevPageX, prevScrollLeft;
+    
+
+            // Drag functionality for moble
+            slider.addEventListener('touchstart', (e) => {
+                dragState = true;
+                prevPageX = e.touches[0].pageX;
+                prevScrollLeft = slider.scrollLeft;
+            });
+
+            slider.addEventListener('touchmove', (e) => {
+                if (!dragState) return;
+                e.preventDefault();
+                let posDeff = e.touches[0].pageX - prevPageX;
+                slider.scrollLeft = prevScrollLeft - posDeff;
+            });
+
+            slider.addEventListener('touchend', () => {
+                dragState = false;
+            });
+
+
+
+            // Drag functionality for mouse
+            slider.addEventListener('mousemove', (e) => {
+                if (!dragState) return;
+                e.preventDefault();
+                let posDeff = e.pageX - prevPageX;
+                slider.scrollLeft = prevScrollLeft - posDeff;
+            });
+    
+            slider.addEventListener('mousedown', (e) => {
+                dragState = true;
+                prevPageX = e.pageX;
+                prevScrollLeft = slider.scrollLeft;
+            });
+    
+            slider.addEventListener('mouseup', () => {
+                dragState = false;
+            });
+    
+            slider.addEventListener('mouseleave', (e) => {
+                e.preventDefault();
+                dragState = false;
+            });
+        };
+    
+        // Call the function to initialize the slider
+        initializeSlider("topRatedThisYearSlider");
+        initializeSlider("topRatedSlider");
+        initializeSlider("genres");
+        initializeSlider("inLibrary");
+        initializeSlider("recommendedSlider");
+    });
+    
+    
+
+</script>
+
+{% endblock %}
