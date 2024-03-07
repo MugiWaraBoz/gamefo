@@ -1,0 +1,25 @@
+
+
+.about_page {
+    color: rgb(204, 204, 204);
+    display: flex;
+    justify-content: center;
+}
+
+.about_page h1 {
+    font-size: 3rem;
+    text-align: center;
+    color: rgb(4, 197, 4);
+    margin-bottom: 1rem;
+}
+
+.about_page div {
+    display: flex;
+    flex-direction: column;
+    width: 1300px;
+}
+
+.about_page p {
+    font-size: 2rem;
+    line-height: 5rem;
+}
