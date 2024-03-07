@@ -648,6 +648,11 @@ def change_username():
             return redirect("/my-account")
         
         user = Users.query.filter_by(name=old_name).first()
+        if user.name == "test_account":
+            flash("you can't change the test account name")
+            return redirect(url_for('my_acc'))
+        
+        
         if user:
  
             existing_user_name = Users.query.filter_by(name=new_name).first()
@@ -687,6 +692,10 @@ def change_password():
          
         
         user = Users.query.filter_by(id=current_user.id).first()
+        if user.name == "test_account":
+            flash("you can't change the test account password")
+            return redirect(url_for('my_acc'))
+        
         if user:
             if check_password_login(user, old_pass):
                   
@@ -736,6 +745,10 @@ def delete_acc():
        return redirect(url_for('login'))
    
     current_user_id = current_user.id
+    user_info = Users.query.filter_by(id=current_user_id).first()
+    if user_info.name == "test_account":
+        flash("you can't delete the test account")
+        return redirect(url_for('my_acc'))
     
     # Delete user's game data
     user_game_data = GameData.query.filter_by(user_id=current_user_id).all()
