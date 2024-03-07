@@ -214,10 +214,25 @@ button:hover {
 }
 
 .main_container_get_started {
-    height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main_container_get_started .test_acc {
+    color: rgb(206, 205, 205);
+    width: 50vw;
+    border-radius: 25px;
+    text-align: center;
+    padding: 22px;
+    border: 2px solid rgb(0, 163, 0);
+}
+
+.main_container_get_started .gt_boxes {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     align-items: center;
 }
 
@@ -337,9 +352,7 @@ button:hover {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #1e1e1eef;
         backdrop-filter: blur(5px);
-        color: #EEEDEB;
         opacity: 1;
         transition: 300ms ease-out;
     }
@@ -385,7 +398,6 @@ button:hover {
         justify-content: center;
         align-items: center;
         background-color: #D9D9D9;
-        color: #040D12;
     }
         
 
@@ -396,10 +408,12 @@ button:hover {
 
     .main_container_get_started {
         height: 100vh;
-        display: grid;
-        grid-template-rows: auto;
-        justify-content: center;
+        flex-direction: column;
         text-align: left;
+    }
+
+    .main_container_get_started .gt_boxes {
+        flex-direction: column;
     }
 
 
