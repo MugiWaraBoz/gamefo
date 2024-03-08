@@ -10,6 +10,7 @@ from functions import *
 import requests
 import random
 
+# initiating flask app
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -26,6 +27,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
+# creating models for db
 class Users(UserMixin, db.Model):
     __tablename__ = 'users' 
     id = db.Column(db.Integer, primary_key=True, index=True)
@@ -86,9 +88,10 @@ class UserPreferences(db.Model):
 
 
 
-
+# handeling the erros
 @app.errorhandler(404)
 def internal_server_error(error):
+    flash("Oops Something went wrong or page not found")
     return redirect("/")
 
 @app.errorhandler(502)
@@ -112,6 +115,7 @@ with app.app_context():
 def check_password_login(user_pass, check_password):
     return bcrypt.check_password_hash(user_pass.hash, check_password)
 
+# front page
 @cache.cached(timeout=120)
 @app.route('/')
 def index():
@@ -157,6 +161,7 @@ def search():
     return render_template('search_page.html',showGS = True, title="Search Game")
 
 
+
 @app.route('/get_started')
 def get_started():
     if current_user.is_authenticated:
@@ -199,7 +204,7 @@ def get_games():
             else:
                 prev_url = ""
                 
-                
+ 
             usr_game_db = get_added_game_datas()
             
             
@@ -297,7 +302,7 @@ def get__prev_games():
         usr_game_db = get_added_game_datas()
         return render_template("search_page.html",usr_games = usr_game_db)
     
-# @cache.cached(timeout=86400)
+# Per Game page
 @cache.cached(timeout=3600)
 @app.route('/games/<game_id>', methods=['GET', 'POST'])
 def game_info(game_id):
@@ -313,7 +318,7 @@ def game_info(game_id):
 
 
 
-# @cache.cached(timeout=86400)
+# get genre games
 @cache.cached(timeout=3600)
 @app.route('/genres/<genre_id>', methods=['GET', 'POST'])
 def genre_game_info(genre_id):
@@ -341,7 +346,7 @@ def genre_game_info(genre_id):
 
 
 
-
+# add-game in library/database
 @app.route('/add_game', methods=['GET', 'POST'])
 def add_game():
     
@@ -373,7 +378,7 @@ def add_game():
     flash("Game added to your profile", "success")    
     return redirect(url_for('game_info', game_id=str(game_id) ))
 
-
+# remove-game for library/database
 @app.route('/remove_game', methods=['GET', 'POST'])
 def delete_game():
     if not current_user.is_authenticated:
@@ -396,7 +401,8 @@ def delete_game():
     # return redirect(url_for('dashbord'))
     return redirect("/")
     
-    
+
+# fething tags, genres, platforms, publishers, developers 
 @cache.cached(timeout=3600)
 @app.route('/game-picker', methods=['GET', 'POST'])
 @login_required
@@ -413,7 +419,8 @@ def game_picker():
                                             developers=developers, 
                                             title="Game Picker")
     
-    
+
+# Game Filterer 
 @cache.cached(timeout=3600)
 @app.route('/game-picker/random-game', methods=['GET', 'POST'])
 @login_required
@@ -458,7 +465,7 @@ def random_game():
     return redirect(url_for('game_picker'))
 
 
-
+# set preferances from my_acc
 @cache.cached(timeout=3600)
 @app.route('/preferance', methods=['GET', 'POST'])
 @login_required
@@ -500,6 +507,7 @@ def rec_game_usr():
     return redirect(url_for('my_acc'))
 
 
+# random game generator
 @cache.cached(timeout=3600) 
 @app.route('/pick-and-play', methods=['GET', 'POST'])
 @login_required
@@ -635,6 +643,7 @@ def login():
     return render_template("get_started.html")
 
 
+# Change Username
 @app.route('/change_username', methods=["GET", "POST"])
 @login_required
 def change_username():
@@ -677,6 +686,7 @@ def change_username():
     return redirect("/my-account")
 
 
+# Change Password
 @app.route('/change_password', methods=["GET", "POST"])
 @login_required
 def change_password():
@@ -771,10 +781,13 @@ def delete_acc():
     return redirect("/")
 
 
+# about page
 @app.route('/about-page', methods=["GET", "POST"])
 def about_page():
     return render_template("about_page.html")
 
+
+# my_account
 @app.route('/my-account', methods=["GET", "POST"])
 @login_required
 def my_acc():

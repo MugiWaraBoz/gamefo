@@ -31,7 +31,7 @@
     {% endif %}
   {% endwith %}
   
-
+    <!-- Pc navigation meny -->
     <header class="header">
       <a href="/"><span class="web_name">Gamefo.</span></a>
       {% if current_user.is_authenticated %}
@@ -47,6 +47,7 @@
       {% endif %}
     </header>
 
+    <!-- Mobile navigation menu -->
     <nav class="mobile_nab_menu">
       <div class="top_text"><a style="color: white; text-decoration: none;" href="{{ url_for('index') }}">Gamefo.</a></div>
       <div class="bottom_nav">
@@ -66,6 +67,8 @@
 
     {% block land_page %}
     {% endblock %}
+
+    <!-- footer -->
   </div>
     <footer class="footer">
       <p class="footer_title">Powerd by</p>

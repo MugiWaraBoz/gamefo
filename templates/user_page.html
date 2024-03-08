@@ -249,7 +249,7 @@ Password needs to be at least 8 characters long
     
         document.getElementById("tagForm").submit();
     }
-
+    
     document.addEventListener('DOMContentLoaded', function() {
         function collectCheckboxes(checkboxes, inputName) {
             const selectedValue = [];
@@ -259,7 +259,8 @@ Password needs to be at least 8 characters long
                     selectedValue.push(checkbox.value);
                 }
             });
-        
+            
+            // adding the checkboxes value in the list
             let hiddenInput = document.querySelector(`input[name="${inputName}"]`);
             if (!hiddenInput) {
                 hiddenInput = document.createElement("input");

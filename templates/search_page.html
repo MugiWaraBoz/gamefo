@@ -10,23 +10,7 @@
         <button type="submit" class="game_search_button" ><i class="fa-brands fa-searchengin fa-2xl"></i></button>
     </form>
 
-
-    <!-- <div class="game_data_container">
-            <div class="per_game_container">
-                <span class="game_pic">
-                    <img class="game_img" src="https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg" alt="hh">
-                </span>   
-                <span class="game_name">    reeeeeeeeeeee </span> 
-                <span class="game_date">     2024/32/23</span>
-                <span class="game_ratings"><p style="font-size: 15px; text-align: center;">rating</p>3.2</span>
-            </div>
-            <div class="next_prev">
-            <i class="fa-solid fa-backward"></i>
-            <p>Couldn't find your game? kee browsing!</p>
-            <i class="fa-solid fa-forward"></i>
-        </div>
-    </div> -->
-
+    <!-- search results -->
     {% if games_data %}
         <div class="game_data_container">
             {% for game in games_data %}
