@@ -91,7 +91,6 @@ class UserPreferences(db.Model):
 # handeling the erros
 @app.errorhandler(404)
 def internal_server_error(error):
-    flash("Oops Something went wrong or page not found")
     return redirect("/")
 
 @app.errorhandler(502)
