@@ -39,7 +39,7 @@ def check_password(password):
 
 
 # api fetching
-api_key_rawg = "4f3070a92533431e968641a512695fa0"
+api_key_rawg = "Your API from RAWG API"
 baseURL = "https://api.rawg.io/api/"
 
 def game_data(game_name):
