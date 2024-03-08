@@ -1,7 +1,17 @@
+<div align="center"> 
+
 # Gamefo - Your Ultimate Gaming Companion
 
+</div>
+
 <div align="center"> 
-  <h3>Intro</h3> 
+| <a href="#section-1">Intro</a> | 
+<a href="#section-2">How to Run it in Local Environment</a> |
+<a href="#section-3">Website Features</a> |
+</div>
+
+<div align="center"> 
+  <h1 id="section-1">Intro</h1> 
 </div>
 
 <b>Welcome to Gamefo</b> - Your Ultimate Gaming Companion -> <i>powered by <a href="https://rawg.io/apidocs">rawg api</a></i>
@@ -13,7 +23,7 @@ Explore the Filtering Section, where you wield the power to tailor your gaming e
 Feeling adventurous? Dive into the thrill of randomness with our Random Game feature. Let the gaming fates decide your next play, promising a surprise with every click. To elevate your Random Game experience, personalize your preferences by visiting your account. Set your gaming preferences by selecting at least three checkboxes, and watch as the magic unfolds with each random game suggestion.
 
 Gamefo is more than a website; it's a passion project and the culmination of knowledge and effort poured into the **final project for CS50x**. Explore, discover, and game on! Finished with love on 03/07/2024.
-
+<hr>
 <div align="center"> 
   <h3>Technologies Used</h3> 
 </div>
@@ -21,9 +31,51 @@ Gamefo is more than a website; it's a passion project and the culmination of kno
 <b>Languages</b> -> HTML, CSS, JavaScript, Python<br>
 <b>Frameworks</b> -> Flask, SQLAlchemy<br>
 <b>Database</b> -> Sqlite3<br>
+<hr>
+
+
+
+
+<div align="center"> 
+  <h1 id="section-2">How to Run it in Local Environment</h1> 
+</div>
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/MugiWaraBoz/gamefo.git
+   cd gamefo
+   ```
+
+2. **Create a Virtual Environment:**
+   ```bash
+   python3 -m venv venv
+   ```
+
+3. **Activate the Virtual Environment:**
+   - *On Unix/Linux/Mac:*
+     ```bash
+     source venv/bin/activate
+     ```
+   - *On Windows:*
+     ```bash
+     venv\Scripts\activate
+     ```
+
+4. **Install Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. **Run it:**
+   ```bash
+   flask run
+   ```
+<hr>
+
+
 
 <div align="center">
-<h1>Website Features </h1> 
+<h1 id="section-3">Website Features </h1> 
 </div>
 
 <div align="center" style="color: lightblue;">
@@ -92,4 +144,11 @@ In conclusion, Gamefo invites you to embark on a gaming adventure like never bef
 </h3>
 <div align=center>
 <b>Gamefo - Explore. Discover. Game On!</b>
+</div>
+<hr>
+
+<div align="center"> 
+| <a href="#section-1">Intro</a> | 
+<a href="#section-2">How to Run it in Local Environment</a> |
+<a href="#section-3">Website Features</a> |
 </div>
