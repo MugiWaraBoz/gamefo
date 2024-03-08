@@ -67,7 +67,7 @@ Gamefo is more than a website; it's a passion project and the culmination of kno
    ```
 
 7. **Enter API:**<br>
-  from ```functions.py``` add your API key from rawg api here
+  In ```functions.py``` add your API key from rawg api here
    ```bash
    api_key_rawg = "Your API from RAWG API"
    ```
