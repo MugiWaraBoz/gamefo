@@ -14,7 +14,7 @@ import random
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.secret_key = '63e9c7ec799576e61f8d7fe6280249bbda073a760438a758a20ca44272e23c13'
+app.secret_key = '--'
 
 # Initialize loginManager, bcrypt, cache, gzip
 login_manager = LoginManager(app)
@@ -816,3 +816,4 @@ def my_acc():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
